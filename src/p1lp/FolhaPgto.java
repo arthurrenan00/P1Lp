@@ -109,12 +109,12 @@ public class FolhaPgto {
         System.out.print("Digite seu nome: ");
         nome = teclado.next(); //lê o nome do usuario
         do {
-            System.out.print("\nDigite seu salario bruto: ");
+            System.out.print("Digite seu salario bruto: ");
             salBruto = teclado.nextDouble();
         } while (salBruto < 1); //repete enquanto o usuário digitar um salário menor que 1
 
         do {
-            System.out.print("\nHoras trabalhadas: ");
+            System.out.print("Horas trabalhadas: ");
             ht = teclado.nextInt();
         } while (ht < 0); //repete enquanto o usuário digitar um valor de horas trabalhadas menor que 0
 
