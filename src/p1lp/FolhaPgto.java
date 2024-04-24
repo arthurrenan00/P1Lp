@@ -35,6 +35,22 @@ public class FolhaPgto {
         }
     }
 
+    /*MÉTODO PARA CALCULAR O IRPF*/
+    public static double CalculoIRPF(double salario) { //parâmetro do tipo double (no caso, o salário)
+        double irpf = 0;
+        if (salario <= 2259.20) {//um salário de até 2259.20 não recebe alteração do IRPF
+            return 0; //retorna um valor vazio;
+        } else if (salario <= 2826.65) { //de 2259.21 até 2826.65
+            irpf = salario * 0.075 - 169.44; // alíquota de 7.50% e parcela a deduzir do IR: 169.44
+        } else if (salario <= 3751.05) {//de 2826.66 até 3751.05
+            irpf = salario * 0.15 - 381.44; // alíquota de 15% e parcela a deduzir do IR: 381.44
+        } else if (salario <= 4664.68) {//de 3751.06 até 4664.68
+            irpf = salario * 0.225 - 662.77; // alíquota de 22.5% e parcela a deduzir do IR: 662.77
+        } else {//acima de 4664.68
+            irpf = salario * 0.275 - 896; // alíquota de 27.5% e parcela a deduzir do IR: 896
+        }
+        return irpf; //retorna o valor do IRPF 
+    }
     public static void main(String[] args) {
         /*Declarando as variáveis*/
         String nome;
