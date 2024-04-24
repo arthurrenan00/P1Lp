@@ -135,5 +135,6 @@ public class FolhaPgto {
             System.out.println("Desconto por atraso.....: " + formatacao(heOuDesc)); //imprime o valor do desconto
         }
         System.out.println("Salario liquido.....: " + formatacao(salLiq));
+        teclado.close();
     }
 }
