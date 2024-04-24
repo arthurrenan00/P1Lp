@@ -95,27 +95,45 @@ public class FolhaPgto {
     }
 
     public static void main(String[] args) {
-        /*Declarando as variáveis*/
+        //Declarando as variáveis
         String nome;
         int ht; //horas trabalhadas
-        double salBruto, salPorHora, irpf, inss;
+        double salBruto, salLiq; //salário bruto e salário líquido
 
-        /*Declarando o scanner para ler o teclado*/
+        //Declarando o scanner para ler o teclado
         Scanner teclado = new Scanner(System.in);
 
-        /*Iniciando as entradas de dados*/
+        System.out.println("*****FOLHA DE PAGAMENTO*****");
+
+        //Iniciando as entradas de dados
         System.out.print("Digite seu nome: ");
         nome = teclado.next(); //lê o nome do usuario
         do {
             System.out.print("\nDigite seu salario bruto: ");
             salBruto = teclado.nextDouble();
-        } while (salBruto < 1);
+        } while (salBruto < 1); //repete enquanto o usuário digitar um salário menor que 1
 
         do {
             System.out.print("\nHoras trabalhadas: ");
             ht = teclado.nextInt();
-        } while (ht < 1);
-        String HeOuDesc = HoraExtraOuDesconto(salBruto, ht); //variável String para receber o valor de hora extra ou desconto
-        System.out.println(HeOuDesc); //imprime a String pro usuário
+        } while (ht < 0); //repete enquanto o usuário digitar um valor de horas trabalhadas menor que 0
+
+        double heOuDesc = HoraExtraOuDesconto(salBruto, ht); //variável double para receber o valor de hora extra ou desconto
+        double irpf = CalculoIRPF(salBruto); //variável double que recebe o resultado do método de calcular o IRPF
+        double inss = CalculoINSS(salBruto); //variável double que recebe o resultado do método de cálculo do INSS
+        salLiq = salBruto - irpf - inss + heOuDesc;
+
+        System.out.println("\n*****CALCULO DA FOLHA DE PAGAMENTO*****");
+        System.out.println("Nome do colaborador.....: " + nome);
+        System.out.println("Salario Bruto.....: " + salBruto);
+        System.out.println("IRPF retido.....: " + formatacao(irpf)); //imprime o valor do irpf
+        System.out.println("INSS retido.....: " + formatacao(inss)); //imprime o valor do inss
+        if (heOuDesc > 0) {
+            System.out.println("Hora extra a receber.....: " + formatacao(heOuDesc)); //imprime o valor da hora extra
+        }
+        if (heOuDesc < 0) {
+            System.out.println("Desconto por atraso.....: " + formatacao(heOuDesc)); //imprime o valor do desconto
+        }
+        System.out.println("Salario liquido.....: " + formatacao(salLiq));
     }
 }
