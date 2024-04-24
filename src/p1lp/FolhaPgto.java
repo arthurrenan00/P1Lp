@@ -51,6 +51,49 @@ public class FolhaPgto {
         }
         return irpf; //retorna o valor do IRPF 
     }
+
+    /*MÉTODO PARA CALCULAR O INSS*/
+    public static double CalculoINSS(double salario) { //parâmetro do tipo double (salario)
+        double inss = 0, faixaDoSal; //variável do inss e da faixa do salario digitado pelo usuário
+        /*
+                        Salario (de)    Salário (até)   Alíquota
+        1° faixa    0,00                1412              7,5%
+        2° faixa    1412,01          2666,68         9%
+        3° faixa    2666,68          4000,03         12%
+        4° faixa    4000,04          7786,02         14%
+        
+            // fórmula para calcular o valor da faixaDoSal
+            (salario digitado - salário limite da faixa anterior) * %da faixa correspondente
+            Exemplo: salário digitado = 5000
+            A faixa dele é a 4°, então o limite anterior é de 4000,03... logo:
+            faixaDoSal = (5000 - 4000.03) * 0.14;
+         */
+
+        //Estabelecendo os cálculos de cada faixa salarial  
+        double faixa1 = 1412 * 0.075;
+        double faixa2 = (2666.68 - 1412.00) * 0.09;
+        double faixa3 = (4000.03 - 2666.68) * 0.12;
+        double faixa4 = (7786.02 - 4000.03) * 0.14;
+
+        if (salario <= 1412) { //faixa de até 1412 reais
+            faixaDoSal = salario * 0.075;
+            inss = faixaDoSal; // valor final do inss
+        } else if (salario <= 2666.68) { //faixa entre 1412,01 e 2666.68
+            faixaDoSal = (salario - 1412) * 0.09;
+            inss = faixa1 + faixaDoSal; //valor final do inss é a faixa1 + a faixa do salario digitado
+        } else if (salario <= 4000.03) { //faixa entre 2666.69 e 4000.03
+            faixaDoSal = (salario - 2666.68) * 0.12;
+            inss = faixa1 + faixa2 + faixaDoSal; //valor final do inss é a faixa1 + faixa2 + a faixa do salario digitado
+        } else if (salario <= 7786.02) {//faixa entre 4000.04 e 7786.02
+            faixaDoSal = (salario - 4000.03) * 0.14;
+            inss = faixa1 + faixa2 + faixa3 + faixaDoSal; //valor final do inss é a faixa1 + faixa2 + faixa3 + a faixa do salario digitado
+        } else {// faixa acima de 7786.02
+            inss = faixa1 + faixa2 + faixa3 + faixa4;//valor final do inss é a soma de todas as faixas salariais
+        }
+
+        return inss; //retorna o valor final do INSS
+    }
+
     public static void main(String[] args) {
         /*Declarando as variáveis*/
         String nome;
