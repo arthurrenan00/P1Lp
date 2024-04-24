@@ -9,7 +9,13 @@ import java.util.Scanner;
 
 public class FolhaPgto {
 
-    //método para calcular o valor da hora extra ou desconto por atraso
+    public static String formatacao(double valor) { //método para formatar valores decimais do tipo double
+        DecimalFormat df = new DecimalFormat(); //classe para formatação de valores
+        df.applyPattern("R$ #,##0.00"); // formatação para valores em REAIS
+
+        return df.format(valor); //retorna a string com o valor formatado
+    }
+
     /*
         Este método tem duas variáveis como parâmetro:
         double salario -> variável do tipo double que recebe o salário bruto informado pelo usuário
