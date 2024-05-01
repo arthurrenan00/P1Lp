@@ -25,14 +25,12 @@ public class FolhaPgto {
     public static double HoraExtraOuDesconto(double salario, int horasT) {
         double sph = salario / 160; //cálculo do salário por hora
         double valorLiquido = sph * (horasT - 160); // cálculo do valor líquido de acordo com a diferença das horas trabalhadas por 160
-
-        if (horasT < 160) { //se as horas trabalhadas serem menores que 160
-            return valorLiquido; //irá retornar a string do desconto por atraso com o valor formatado
-        } else if (horasT > 160) { //se as horas trabalhadas serem maiores que 160
-            return valorLiquido; //irá retornar a string da hora extra a receber com o valor formatado
-        } else { // se as horas trabalhadas não forem nem maiores nem menores que 160 (então são iguais)
-            return 0; //retorna um valor 0, pois não irá alterar o valor do salário nesse caso
+        if(horasT == 160){
+            return 0;
+        }else{
+            return valorLiquido;
         }
+        
     }
 
     /*MÉTODO PARA CALCULAR O IRPF*/
